@@ -47,10 +47,15 @@
 
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput (keyup)="returnMovies()" placeholder="Search a movie">
-        <p>{{movieNames}}</p>
+        <input matInput (keyup)="returnMovies($event)" placeholder="Search a movie">
       </mat-form-field>
     </form>
+
+    <ul>
+      <li *ngFor="let movieName of movieNames">
+        {{ movieName }}
+      </li>
+    </ul>
 
   </mat-tab>
 

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Movie } from '../movie'
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-my-dialog',
@@ -7,18 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyDialogComponent implements OnInit {
 
-  data;
+  model = new Movie('', '', 0, 0);
+  movies:any[];
+  @Output() moviesEvent = new EventEmitter<any>()
 
-  constructor() { }
+  constructor(private httpClient:HttpClient) { }
 
   ngOnInit() {
   }
 
-  onCloseConfirm() {
+  onSubmit() {
+    this.httpClient.post('https://snickdx.me:3002/movies/', this.model)
+      .subscribe(
+        (data:any) => {
+          console.log(data)
+        }
+      )
 
+    this.httpClient.get('https://snickdx.me:3002/movies')
+      .subscribe(
+        (data:any[]) => {
+          this.movies = data;
+          console.log(data);
+        }
+      )
+
+    this.moviesEvent.emit(this.movies);
   }
 
   onCloseCancel() {
 
+  }
+
+  get diagnostic() {
+    return JSON.stringify(this.model);
   }
 }

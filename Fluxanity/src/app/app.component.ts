@@ -8,9 +8,10 @@ import { HttpClient }from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  movies:any;
+  movies:any[];
   dataSource:any;
-  movieNames:string;
+  movieNames:any[];
+  searchName:string;
 
   title = 'app';
   displayedColumns = ['title', 'genre', 'rating', 'cost'];
@@ -27,7 +28,20 @@ export class AppComponent {
   }
 
   returnMovies(event:any){
-    this.movieNames = event.target.value;
+    this.movieNames = [];
+    this.searchName = event.target.value;
+
+    if(this.searchName != ''){
+      for (var x = 0; x < this.movies.length; x++) {
+        if (this.movies[x].title.includes(this.searchName)) {
+          this.movieNames.push(this.movies[x].title);
+        }
+      }
+    }
+  }
+
+  recieveMovies($event){
+    this.dataSource = $event;
   }
 
   ngOnInit(){
@@ -48,15 +62,3 @@ export interface MovieElement {
   rating: number;
   cost: string;
 }
-
-const MOVIE_DATA: MovieElement[] = [
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'},
-  {title: 'Moonlit', genre: 'Drama', rating: 5, cost: '$10'}
-];
