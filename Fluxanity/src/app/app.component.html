@@ -37,13 +37,21 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <button mat-raised-button (click)="openDialog()">Pick one</button>
+    <div style="text-align:center">
+      <app-dialog-demo></app-dialog-demo>
+    </div>
 
   </mat-tab>
 
   <mat-tab label="Two">
-    <h1>Some more tab content</h1>
-    <p>...</p>
+
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput (keyup)="returnMovies()" placeholder="Search a movie">
+        <p>{{movieNames}}</p>
+      </mat-form-field>
+    </form>
+
   </mat-tab>
 
 </mat-tab-group>
