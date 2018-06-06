@@ -5,19 +5,19 @@
     <form class="add-movie" #movieForm="ngForm">
 
       <mat-form-field class="example-full-width">
-        <input matInput type="text" class="form-control" id="title" [(ngModel)]="model.title" name="title" placeholder="Title">
+        <input matInput type="text" class="form-control" id="title" [(ngModel)]="data.title" name="title" placeholder="Title">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput type="text" class="form-control" id="genre" [(ngModel)]="model.genre" name="genre" placeholder="Genre">
+        <input matInput type="text" class="form-control" id="genre" [(ngModel)]="data.genre" name="genre" placeholder="Genre">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput type="number" class="form-control" id="rating" [(ngModel)]="model.rating" name="rating" placeholder="Rating">
+        <input matInput type="number" class="form-control" id="rating" [(ngModel)]="data.rating" name="rating" placeholder="Rating">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput type="number" class="form-control" id="cost" [(ngModel)]="model.cost" name="cost" placeholder="Cost">
+        <input matInput type="number" class="form-control" id="cost" [(ngModel)]="data.cost" name="cost" placeholder="Cost">
       </mat-form-field>
 
     </form>

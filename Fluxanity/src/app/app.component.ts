@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatTableDataSource} from '@angular/material';
 import { HttpClient }from '@angular/common/http';
+import {MyDialogComponent} from "./my-dialog/my-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
   title = 'app';
   displayedColumns = ['title', 'genre', 'rating', 'cost'];
 
-  constructor(private httpClient:HttpClient){}
+  constructor(private httpClient:HttpClient, public dialog: MatDialog){}
 
   getProfile(){
     this.httpClient.get('https://snickdx.me:3002/movies')
@@ -44,7 +45,7 @@ export class AppComponent {
     this.dataSource = $event;
   }
 
-  ngOnInit(){
+  getMovies(){
     this.httpClient.get('https://snickdx.me:3002/movies')
       .subscribe(
         (data:any[]) => {
@@ -53,6 +54,25 @@ export class AppComponent {
           console.log(data);
         }
       )
+  }
+
+  openDialog(): void{
+    let dialogRef = this.dialog.open(MyDialogComponent, {
+      width: '300px',
+      data: { title: '', genre: '', rating: '', cost: '' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      console.log(result);
+      this.movies = [];
+      this.getMovies();
+      dialogRef.close();
+    });
+  }
+
+  ngOnInit(){
+    this.getMovies();
   }
 }
 
