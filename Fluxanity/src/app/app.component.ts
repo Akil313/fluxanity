@@ -34,7 +34,7 @@ export class AppComponent {
 
     if(this.searchName != ''){
       for (var x = 0; x < this.movies.length; x++) {
-        if (this.movies[x].title.includes(this.searchName)) {
+        if (this.movies[x].title.trim().includes(this.searchName)) {
           this.movieNames.push(this.movies[x].title);
         }
       }

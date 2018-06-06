@@ -11,7 +11,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {st} from "@angular/core/src/render3";
-import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -21,7 +20,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
-    DialogDemoComponent,
     MyDialogComponent
   ],
   imports: [
@@ -39,6 +37,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogDemoComponent, MyDialogComponent]
+  entryComponents: [MyDialogComponent]
 })
 export class AppModule { }

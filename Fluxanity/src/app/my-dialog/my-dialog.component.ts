@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter, Inject} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from '../movie'
 import {AppComponent} from "../app.component";
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-my-dialog',
@@ -34,7 +34,7 @@ export class MyDialogComponent implements OnInit {
   }
 
   onCloseCancel() {
-    this.dialogRef.close;
+    this.dialogRef.close();
   }
 
   get diagnostic() {
