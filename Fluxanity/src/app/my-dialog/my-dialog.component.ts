@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Inject} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from '../movie'
 import {AppComponent} from "../app.component";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-my-dialog',
@@ -10,39 +11,33 @@ import {AppComponent} from "../app.component";
 })
 export class MyDialogComponent implements OnInit {
 
-  model = new Movie('', '', 0, 0);
   movies:any[];
   @Output() moviesEvent = new EventEmitter<any>()
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, public dialogRef: MatDialogRef<MyDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data:any) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    this.httpClient.post('https://snickdx.me:3002/movies/', this.model)
+    this.httpClient.post('https://snickdx.me:3002/movies/', this.data)
       .subscribe(
         (data:any) => {
           console.log(data)
         }
       )
 
-    this.httpClient.get('https://snickdx.me:3002/movies')
-      .subscribe(
-        (data:any[]) => {
-          this.movies = data;
-          console.log(data);
-        }
-      )
-
     this.moviesEvent.emit(this.movies);
+
+    this.dialogRef.close();
   }
 
   onCloseCancel() {
-
+    this.dialogRef.close;
   }
 
   get diagnostic() {
-    return JSON.stringify(this.model);
+    return JSON.stringify(this.data);
   }
 }
