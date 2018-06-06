@@ -1,1 +1,2 @@
-*.xml
+.idea/
+Fluxanity/node_modules/
